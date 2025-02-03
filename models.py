@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class Cupcake(db.model):
+class Cupcake(db.Model):
   """model for cupcake database"""
 
   __tablename__ = "cupcakes"
@@ -14,17 +14,16 @@ class Cupcake(db.model):
   rating = db.Column(db.Float, nullable = False)
   image = db.Column(db.Text, nullable = False, default = "https://tinyurl.com/demo-cupcake")
 
-  @property
   def serialize(self):
-    """create jsonified information"""
-    json = {
+    """create serialized information"""
+    info = {
       "id": self.id,
       "flavor": self.flavor,
       "size": self.size,
       "rating": self.rating,
-      "image": self.image
+      "image": self.image,
     }
-    return json
+    return info
 
 
 def connect_db(app):
